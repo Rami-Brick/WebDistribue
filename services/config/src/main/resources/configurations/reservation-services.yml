@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: reservation-services
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/CapFest-Project
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@localhost:27018/productdb?authSource=admin
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+
+server:
+  port: 8069
+
+
+
+
+
+#  main:
+#    web-application-type: reactive
+#  config:
+#    import: optional:configserver:http://localhost:8888
+
+#logging:
+#  level:
+#    root: INFO
+#    org.springframework.data.mongodb.core: DEBUG

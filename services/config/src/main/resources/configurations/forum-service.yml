@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: forum-service
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: idriss.benyounes@gmail.com  # Ensure this is a full email address
+    password: ccyr tszc suzm yqyl  # This should be your app-specific password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/CapFest-Project
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@localhost:27018/forumdb?authSource=admin
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+server:
+  port: 8091

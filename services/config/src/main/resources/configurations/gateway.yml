@@ -1,0 +1,72 @@
+eureka:
+  client:
+    register-with-eureka: true
+server:
+  port: 8222
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: forum-service-discussions
+          uri: http://localhost:8091
+          predicates:
+            - Path=/api/discussions/**
+        - id: forum-service-tags
+          uri: http://localhost:8091
+          predicates:
+            - Path=/api/tags/**
+        - id: forum-service-comments
+          uri: http://localhost:8091
+          predicates:
+            - Path=/api/comments/**
+
+        - id: reservation-services
+          uri: http://localhost:8069
+          predicates:
+            - Path=/api/reservations/**
+
+        - id: Espaces-service
+          uri: http://localhost:8096
+          predicates:
+            - Path=/api/espaces/**
+        - id: event-service
+          uri: http://localhost:8099
+          predicates:
+            - Path=/evenement/**
+
+        - id: produit-service
+          uri: http://localhost:8095
+          predicates:
+            - Path=/produits/**
+
+
+      default-filters:
+        - TokenRelay
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:9090/realms/CapFest-Project
+        registration:
+          keycloak:
+            client-id: Cap
+            client-secret: 7PutNNuFwOZpELuQPGinJEoZKaYIAPXv
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/CapFest-Project
+
+
+    eureka:
+      instance:
+        hostname: localhost
+      client:
+        service-url:
+          defaultZone: http://localhost:8761/eureka/
+        register-with-eureka: true
+        fetch-registry: true

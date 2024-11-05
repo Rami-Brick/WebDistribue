@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: discovery
+  config:
+    import: "optional:configserver:http://localhost:8888"  # Load configurations from Config Server, if available
+  profiles:
+    active: discovery  # Ensures the 'discovery.yml' configuration is loaded
+
+server:
+  port: 8761  # Port where the Eureka server will run
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false  # Eureka server does not register itself in its own registry
+    fetch-registry: false         # No need to fetch the registry in a standalone Eureka server
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/  # URL for other services to connect to Eureka

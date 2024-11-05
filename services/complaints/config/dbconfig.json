@@ -1,0 +1,3 @@
+{
+    "url" : "postgresql://localhost:5432/productdb?connectTimeout=10&sslmode=prefer"
+}
