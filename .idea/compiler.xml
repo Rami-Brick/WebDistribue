@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="forum" />
+        <module name="Espaces" />
+        <module name="discovery" />
+        <module name="reservation" />
+        <module name="event" />
+        <module name="productDeco" />
+        <module name="config" />
+        <module name="gateway" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Espaces" options="-parameters" />
+      <module name="config" options="-parameters" />
+      <module name="discovery" options="-parameters" />
+      <module name="event" options="-parameters" />
+      <module name="forum" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="productDeco" options="-parameters" />
+      <module name="reservation" options="-parameters" />
+    </option>
+  </component>
+</project>
