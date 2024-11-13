@@ -1,0 +1,122 @@
+<!-- Breadcrumb Section -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <div class="row align-items-center text-center">
+      <div class="col-md-12 col-12">
+        <h2 class="breadcrumb-title">Update Question</h2>
+        <nav aria-label="breadcrumb" class="page-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.Forum">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Update Question</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Breadcrumb Section -->
+
+<!-- Profile Content -->
+<div class="dashboard-content">
+  <div class="container">
+    <div class="">
+      <ul class="dashborad-menus">
+        <li>
+          <a [routerLink]="routes.dashboard">
+            <i class="feather-grid"></i> <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.profile">
+            <i class="fa-solid fa-user"></i> <span>Profile</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.mylisting">
+            <i class="feather-list"></i> <span>My Listing</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.bookmarks">
+            <i class="fas fa-solid fa-heart"></i> <span>Bookmarks</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.messages">
+            <i class="fa-solid fa-comment-dots"></i> <span>Messages</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.reviews">
+            <i class="fas fa-solid fa-star"></i> <span>Reviews</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.login">
+            <i class="fas fa-light fa-circle-arrow-left"></i> <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="profile-content">
+      <div class="messages-form">
+        <div class="card">
+          <div class="card-header">
+            <h4>Update information</h4>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="onSubmit()" #discussionForm="ngForm">
+              <div class="form-group">
+                <label class="col-form-label">Title <span>*</span></label>
+                <input type="text" class="form-control pass-input" placeholder="Title" name="title" [(ngModel)]="discussion.title" required>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Description <span>*</span></label>
+                <textarea rows="6" class="form-control listingdescription" placeholder="Description" name="content" [(ngModel)]="discussion.content" required></textarea>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Visibility</label>
+                <select class="form-control" name="visibility" [(ngModel)]="discussion.visibility" required>
+                  <option *ngFor="let visibility of visibilityTypes" [value]="visibility">{{ visibility }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Tags</label>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let tag of selectedTags" [selectable]="true" [removable]="true" (removed)="removeTag(tag)">
+                      {{ tag }}
+                      <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <input
+                      placeholder="Add a tag"
+                      matInput
+                      [matChipInputFor]="chipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="true"
+                      (matChipInputTokenEnd)="addTag($event)"
+                      [matAutocomplete]="auto"
+                      [(ngModel)]="tagInput"
+                    />
+                  </mat-chip-list>
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectTag($event)">
+                    <mat-option *ngFor="let tag of filteredTags" [value]="tag">{{ tag }}</mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+
+              <div class="form-group formlast-input">
+                <label class="col-form-label label-heading">Invite Users</label>
+                <input type="text" class="form-control" placeholder="Invite Users (comma separated)" name="invitedUsers" [(ngModel)]="invitedUsersInput" (change)="onInvitedUsersChange()">
+              </div>
+              <div class="d-flex justify-content-end">
+                <button class="btn btn-primary" type="submit">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Profile Content -->

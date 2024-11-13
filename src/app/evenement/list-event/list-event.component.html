@@ -1,0 +1,96 @@
+<div class="main-wrapper" [ngClass]="{ 'menu-opened': showMiniSidebar === true }">
+  
+    <!-- En-tête si nécessaire -->
+    <app-header *ngIf="firstHeader === true"></app-header>
+    
+    <!-- Breadcrumb Bar -->
+    <div class="breadcrumb-bar">
+      <div class="container">
+        <div class="row align-items-center text-center">
+          <div class="col-md-12 col-12">
+            <h2 class="breadcrumb-title">Événements</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- List Content -->
+    <div class="list-content">
+      <div class="container">
+        <div class="row">
+          
+          <!-- Sidebar Filter (if needed) -->
+          <div class="col-lg-4">
+            <div class="listings-sidebar">
+              <div class="card">
+                <h4>Filter</h4>
+                <form>
+                  <!-- Add filter options here if necessary -->
+                </form>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Event List Display Area -->
+          <div class="col-lg-8">
+            <div class="grid-view listgrid-sidebar">
+              <div class="row">
+                <!-- Loading State -->
+                <div *ngIf="isLoading" class="text-center">
+                  <p>Loading events...</p>
+                </div>
+  
+                <!-- Error Message -->
+                <div *ngIf="errorMessage" class="alert alert-danger">
+                  {{ errorMessage }}
+                </div>
+  
+                <!-- Event Cards -->
+                <div class="col-lg-6 col-md-6" *ngFor="let event of events">
+                  <div class="card">
+                    <div class="blog-widget">
+                      <div class="bloglist-content">
+                        <div class="card-body">
+                          <h6>{{ event.nom }}</h6>
+                          <p>{{ event.description }}</p>
+                          <div class="blog-location-details">
+                            <i class="feather-map-pin"></i> {{ event.lieu }}
+                          </div>
+                          <div>
+                            <span>Start Date: {{ event.dateDebut | date: 'short' }}</span>
+                          </div>
+                          <div>
+                            <span>End Date: {{ event.dateFin | date: 'short' }}</span>
+                          </div>
+                          <div>
+                            <span>Participants: {{ event.nombreParticipants }}</span>
+                          </div>
+                          <div>
+                            <span>Organizer: {{ event.organisateur }}</span>
+                          </div>
+                          <div class="amount-details">
+                            <span class="validrate">{{ event.prix | currency }}</span>
+                          </div>
+  
+                          <!-- Action Buttons with Type Check -->
+                          <a *ngIf="event.id !== undefined" (click)="onEditButtonClick(event.id!)" [routerLink]="['/edit-event', event.id]" class="btn btn-primary mt-3">
+                            Modifier
+                          </a>
+                          
+                          <button *ngIf="event.id !== undefined" (click)="onDeleteButtonClick(event.id!)" class="btn btn-danger mt-3 ml-2">
+                            Supprimer
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

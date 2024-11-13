@@ -1,0 +1,160 @@
+<!-- Breadscrumb Section -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <div class="row align-items-center text-center">
+      <div class="col-md-12 col-12">
+        <h2 class="breadcrumb-title">Forums</h2>
+        <nav aria-label="breadcrumb" class="page-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.home1">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">My Forum</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Breadscrumb Section -->
+<!-- Dashboard Content -->
+<div class="dashboard-content">
+  <div class="container">
+    <div class="">
+      <ul class="dashborad-menus">
+        <li>
+          <a [routerLink]="routes.MyDiscussion">
+            <i class="feather-grid"></i> <span>My Discussion</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.profile">
+            <i class="fa-solid fa-user"></i> <span>Profile</span>
+          </a>
+        </li>
+        <li  class="active">
+          <a [routerLink]="routes.Forum">
+            <i class="feather-list"></i> <span>All Discussion</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.bookmarks">
+            <i class="fas fa-solid fa-heart"></i> <span>Bookmarks</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.messages">
+            <i class="fa-solid fa-comment-dots"></i> <span>Messages</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.reviews">
+            <i class="fas fa-solid fa-star"></i> <span>Reviews</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.login">
+            <i class="fas fa-light fa-circle-arrow-left"></i> <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="dash-listingcontent dashboard-info">
+      <div class="dash-cards card">
+        <div class="card-header">
+          <h2>All Questions</h2>
+          <a class="nav-link header-login add-listing" [routerLink]="routes.adddiscussion"><i class="fa-solid fa-plus"></i> Add Question</a>
+        </div>
+        <div class="card-body">
+          <div class="listing-search">
+            <div class="filter-content form-group">
+              <div class="group-img">
+                <input type="text" class="form-control" placeholder="Search...">
+                <i class="feather-search"></i>
+              </div>
+            </div>
+            <div class="sorting-div">
+              <div class="sortbyset">
+                <span class="sortbytitle">Sort by</span>
+                <div class="sorting-select">
+                  <select class="form-control select">
+                    <option>Newest</option>
+                    <option>Newest</option>
+                    <option>Oldest</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!isLoading && discussions.length > 0" class="discussion-list">
+            <div *ngFor="let discussion of discussions" class="discussion-item d-flex align-items-center  py-3">
+              <div class="avatar me-3">
+                <span class="avatar-initials">{{ discussion.userId.charAt(0).toUpperCase() }}</span>
+              </div>
+              <div class="discussion-details flex-grow-1">
+                <h5 class="mb-1">
+                  <a [routerLink]="[routes.commentaire, discussion.discussionId]" class="discussion-title text-primary">{{ discussion.title }}</a>
+                </h5>
+                <p class="discussion-meta text-muted mb-1">
+                  par {{ discussion.userId }}, {{ discussion.viewCount }} vues, {{ discussion.comments }} {{ discussion.comments === 1 ? 'commentaire' : 'commentaires' }}
+                </p>
+                <div class="tags">
+                  <span *ngFor="let tag of discussion.tags" class="badge bg-secondary me-1">{{ tag }}</span>
+                </div>
+              </div>
+              <div class="d-flex align-items-center">
+                <i
+                  class="fa-solid"
+                  [ngClass]="discussion.userHasLiked ? 'fa-thumbs-up text-primary' : 'fa-thumbs-up'"
+                  (click)="toggleLike(discussion)"
+                  style="cursor: pointer; font-size: 1.5rem; margin-right: 5px; transition: color 0.3s, transform 0.3s;"
+                  [title]="discussion.userHasLiked ? 'Unlike' : 'Like'"
+                  (mouseover)="hover = true"
+                  (mouseleave)="hover = false"
+                  [style.color]="hover ? '#007bff' : (discussion.userHasLiked ? '#007bff' : '#6c757d')"
+                ></i>
+                <span class="ms-2 fw-bold" style="font-size: 1.1rem;">
+    {{ discussion.likes }} {{ discussion.likes === 1 ? 'like' : 'likes' }}
+  </span>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="!isLoading && discussions.length === 0">
+            <p class="text-center">No discussions found.</p>
+          </div>
+
+          <div *ngIf="!isLoading && discussions.length === 0">No discussions found.</div>
+
+          <div class="blog-pagination">
+            <nav>
+              <ul class="pagination">
+                <li class="page-item previtem">
+                  <a class="page-link" href="javascript:void(0)"><i class="fas fa-regular fa-arrow-left"></i> Prev</a>
+                </li>
+                <li class="justify-content-center pagination-center">
+                  <div class="pagelink">
+                    <ul>
+                      <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)">1</a>
+                      </li>
+                      <li class="page-item active">
+                        <a class="page-link" href="javascript:void(0)">2 <span class="visually-hidden">(current)</span></a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="javascript:void(0)">3</a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="page-item nextlink">
+                  <a class="page-link" href="javascript:void(0)">Next <i class="fas fa-regular fa-arrow-right"></i></a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Dashboard Content -->

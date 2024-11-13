@@ -1,0 +1,64 @@
+<div
+  class="main-wrapper"
+  [ngClass]="{
+    'menu-opened': showMiniSidebar === true
+  }"
+>
+  <!-- En-tête si nécessaire -->
+  <app-header *ngIf="firstHeader === true"></app-header>
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <div class="row align-items-center text-center">
+        <div class="col-md-12 col-12">
+          <h2 class="breadcrumb-title">Espaces</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Afficher la liste des espaces pour tout le monde -->
+  <div class="container">
+    <!-- Filtre par disponibilité -->
+    <div class="filter-section mb-4">
+      <label for="disponibilite-filter">Filtrer par disponibilité :</label>
+      <select id="disponibilite-filter" [(ngModel)]="filterDisponibilite" (change)="filterByDisponibilite()" class="form-control w-auto">
+        <option value="all">Tous</option>
+        <option value="available">Disponible</option>
+        <option value="not-available">Indisponible</option>
+      </select>
+    </div>
+
+
+    <!-- Afficher la liste des espaces -->
+    <div class="row">
+      <div class="col-lg-6 col-md-6" *ngFor="let espace of filteredEspaces">
+        <div class="card">
+          <div class="card-body">
+            <h6>{{ espace.nom }}</h6>
+            <p>{{ espace.description }}</p>
+            <div class="blog-location-details">
+              <i class="feather-map-pin"></i> {{ espace.adresse }}
+            </div>
+            <div class="amount-details">
+              <span class="validrate">{{ espace.tarif }} DT</span>
+            </div>
+            <div class="availability">
+              <span [ngClass]="espace.disponibilite ? 'text-success' : 'text-danger'">
+                {{ espace.disponibilite ? 'Disponible' : 'Indisponible' }}
+              </span>
+            </div>
+            <a [routerLink]="['/updateespace', espace.id]" class="btn btn-primary mt-3">Modifier</a>
+            <button (click)="onDeleteButtonClick(espace.id)" class="btn btn-danger mt-3 ml-2">Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isLoading" class="text-center">
+      <p>Loading espaces...</p>
+    </div>
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<!-- Breadscrumb Section -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <div class="row align-items-center text-center">
+      <div class="col-md-12 col-12">
+        <h2 class="breadcrumb-title">Forums</h2>
+        <nav aria-label="breadcrumb" class="page-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.home1">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">My Forum</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Breadscrumb Section -->
+<!-- Dashboard Content -->
+<div class="dashboard-content">
+  <div class="container">
+    <div class="">
+      <ul class="dashborad-menus">
+        <li>
+          <a [routerLink]="routes.MyDiscussion">
+            <i class="feather-grid"></i> <span>My Discussion</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.profile">
+            <i class="fa-solid fa-user"></i> <span>Profile</span>
+          </a>
+        </li>
+        <li  class="active">
+          <a [routerLink]="routes.Forum">
+            <i class="feather-list"></i> <span>All Discussion</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.bookmarks">
+            <i class="fas fa-solid fa-heart"></i> <span>Bookmarks</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.messages">
+            <i class="fa-solid fa-comment-dots"></i> <span>Messages</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.reviews">
+            <i class="fas fa-solid fa-star"></i> <span>Reviews</span>
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="routes.login">
+            <i class="fas fa-light fa-circle-arrow-left"></i> <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="dash-listingcontent dashboard-info">
+      <div class="dash-cards card">
+        <div class="card-header">
+          <h2></h2>
+        </div>
+        <div class="card-body">
+          <div *ngIf="discussion" class="discussion-item">
+            <div class="discussion-section bg-white p-3 mb-4">
+              <h3 class="discussion-title">{{ discussion.title }}</h3>
+              <p class="discussion-content">{{ discussion.content }}</p>
+              <div class="discussion-metadata text-muted">
+                <i class="bi bi-calendar"></i> {{ discussion.createdAt | date: 'longDate' }} &nbsp;|&nbsp;
+                <i class="bi bi-person"></i> {{ discussion.userId }} &nbsp;|&nbsp;
+                <i class="bi bi-eye"></i> {{ discussion.viewCount }} views &nbsp;|&nbsp;
+                <i class="bi bi-chat-dots"></i> {{ discussion.comments }} comments
+              </div>
+            </div>
+            <div class="d-flex flex-column col-md-8">
+              <div class="coment-bottom bg-white p-2 px-4">
+                <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                  <input type="text" class="form-control mr-3" placeholder="Add comment" [(ngModel)]="newCommentContent">
+                  <button class="btn btn-primary" type="button" (click)="addComment()">Comment</button>
+                </div>
+            <div *ngFor="let comment of discussion?.commentList"class="commented-section mt-2">
+              <div class="d-flex flex-row align-items-center commented-user">
+                <h5 class="mr-2"></h5>
+                <span class="dot mb-1"></span>
+                <span class="mb-1 ml-2">{{ comment.createdAt | date:'short' }}</span>
+              </div>
+              <div class="comment-text-sm">
+                <span>{{ comment.content }}</span>
+
+              </div>
+              <span class="mb-1 ml-2">{{ comment.userId }}</span>
+
+              <div class="reply-section">
+                <div class="d-flex flex-row align-items-center voting-icons">
+                  <i class="fa fa-sort-up fa-2x mt-3 hit-voting" (click)="upvoteComment(comment.commentId)"></i>
+                  <i class="fa fa-sort-down fa-2x mb-3 hit-voting" (click)="downvoteComment(comment.commentId)"></i>
+                  <span class="ml-2">{{ comment.upvotes - comment.downvotes }}</span>
+                  <span class="dot ml-2"></span>
+                  <h6 class="ml-2 mt-1">Reply</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+            </div>
+          </div>
+          <div class="blog-pagination">
+            <nav>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Dashboard Content -->
+
+

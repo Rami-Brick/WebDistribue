@@ -1,0 +1,22 @@
+.reservation-list {
+  padding: 1em;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 0.5em;
+  border: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f4f4f4;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}

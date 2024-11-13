@@ -1,0 +1,99 @@
+<div class="main-wrapper">
+  <app-header></app-header>
+
+  <!-- Barre de navigation -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <div class="row align-items-center text-center">
+        <div class="col-md-12 col-12">
+          <h2 class="breadcrumb-title">Produit</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenu principal -->
+  <div class="list-content">
+    <div class="container">
+      <div class="row">
+
+        <!-- Formulaire d'ajout de produit -->
+        <div>
+          <button (click)="toggleForm()">
+            {{ showForm ? 'Annuler' : 'Ajouter un produit' }}
+          </button>
+
+          <div *ngIf="showForm">
+            <h2>Ajouter un nouveau produit</h2>
+            <form (ngSubmit)="addProduit()">
+              <div>
+                <label>Nom du produit:</label>
+                <input [(ngModel)]="newProduit.nomProd" name="nomProd" required />
+              </div>
+              <div>
+                <label>Description:</label>
+                <input [(ngModel)]="newProduit.descriptionProd" name="descriptionProd" required />
+              </div>
+              <div>
+                <label>Prix:</label>
+                <input type="number" [(ngModel)]="newProduit.prix" name="prix" required />
+              </div>
+              <div>
+                <label>Quantité en stock:</label>
+                <input type="number" [(ngModel)]="newProduit.quantiteEnStock" name="quantiteEnStock" required />
+              </div>
+              <div>
+                <label>Couleur:</label>
+                <input [(ngModel)]="newProduit.couleur" name="couleur" required />
+              </div>
+              <div>
+                <label>Date d'ajout:</label>
+                <input type="date" [(ngModel)]="newProduit.dateAjout" name="dateAjout" required />
+              </div>
+              <button type="submit">Ajouter le produit</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Liste des produits -->
+        <div class="col-lg-8">
+          <div class="grid-view listgrid-sidebar">
+            <div class="row">
+              <div class="col-lg-6 col-md-6" *ngFor="let produit of produits">
+                <div class="card">
+                  <div class="blog-widget">
+                    <div class="blog-img">
+                      <div class="fav-item">
+                        <span class="Featured-text">{{ produit.nomProd }}</span>
+                      </div>
+                    </div>
+                    <div class="bloglist-content">
+                      <div class="card-body">
+                        <h6>{{ produit.descriptionProd }}</h6>
+                        <p>{{ produit.couleur }}</p>
+                        <div class="blog-location-details">
+                          <i class="feather-map-pin"></i> Quantité en stock : {{ produit.quantiteEnStock }}
+                        </div>
+                        <div class="blog-location-details">
+                          <i class="feather-calendar"></i>
+                          Date d'ajout : {{ produit.dateAjout | date:'d MMMM yyyy' }}
+                        </div>
+                        <div class="amount-details">
+                          <span class="validrate">{{ produit.prix }} DT</span>
+                        </div>
+                      </div>
+                  </div>
+                  <button (click)="deleteProduit(produit.idProd)" class="supprimer-button">Supprimer</button>
+                  <button (click)="modifierDialog(produit)" class="update-button">Modifier</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

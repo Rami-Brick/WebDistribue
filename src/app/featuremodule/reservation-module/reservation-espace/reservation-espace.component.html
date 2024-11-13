@@ -1,0 +1,101 @@
+<!-- Breadscrumb Section -->
+<div class="breadcrumb-bar">
+  <div class="container">
+    <div class="row align-items-center text-center">
+      <div class="col-md-12 col-12">
+        <h2 class="breadcrumb-title">Reservation Espace</h2>
+        <nav aria-label="breadcrumb" class="page-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.home1">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Reservation Espace</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Breadscrumb Section -->
+
+<!-- Profile Content -->
+<div class="dashboard-content">
+  <div class="container">
+    <div class="profile-content">
+      <div class="messages-form">
+        <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+          <div class="card">
+            <div class="card-header">
+              <h4>Espace Information</h4>
+            </div>
+            <div class="card-body">
+              <table class="table table-striped">
+                <tbody>
+                <tr>
+                  <th scope="row">Espace Name</th>
+                  <td>{{ espace.nom }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Description</th>
+                  <td>{{ espace.description }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Address</th>
+                  <td>{{ espace.adresse }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Capacity</th>
+                  <td>{{ espace.capacite }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Tarif</th>
+                  <td>{{ espace.tarif }}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4>Event Information</h4>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="col-form-label">Event Name <span>*</span></label>
+                <input type="text" class="form-control" placeholder="Event Name" formControlName="eventName" required>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Event Date <span>*</span></label>
+                <input type="date" class="form-control" formControlName="eventDate" required>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Event Time <span>*</span></label>
+                <input type="time" class="form-control" formControlName="eventTime" required>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Number of Guests <span>*</span></label>
+                <input type="number" class="form-control" placeholder="Number of Guests" formControlName="numberOfGuests" required>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Decoration Pack <span>*</span></label>
+                <select class="form-control" formControlName="decorationPack" required>
+                  <option value="marriage">Marriage</option>
+                  <option value="gala">Gala</option>
+                  <option value="workshop">Workshop</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Additional Notes</label>
+                <textarea rows="4" class="form-control" placeholder="Additional Notes" formControlName="additionalNotes"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="col-form-label">Organization/Club</label>
+                <input type="text" class="form-control" placeholder="Organization/Club" formControlName="organization">
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Profile Content -->

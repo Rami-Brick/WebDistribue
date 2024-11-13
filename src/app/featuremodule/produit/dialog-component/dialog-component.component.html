@@ -1,0 +1,76 @@
+<div fxLayout="column" fxLayoutAlign="space-between start" fxFill>
+  <ng-container>
+    <!-- Update Produit -->
+    <div fxFlex="3.5rem" fxLayoutAlign="start center">
+      <h1><b><u style="padding-left: 220px; color: #a14643;">Modifier Produit</u></b></h1>
+    </div>
+
+    <div fxFlex="auto" fxFlexAlign="start" fxFill>
+      <br>
+      <br>
+      <form (ngSubmit)="updateProduit()" [formGroup]="produitForm">
+        <div fxLayout="row" fxLayoutAlign="center center" fxFill>
+          <div fxFlex="70" fxFlex.xs="100">
+
+            <mat-form-field color="accent">
+              <input matInput placeholder="Nom du produit" formControlName="nomProd" required />
+              <mat-error *ngIf="produitForm.get('nomProd')?.hasError('required')" style="color:red;">
+                Le nom du produit est requis.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+              <input matInput placeholder="Description du produit" formControlName="descriptionProd" required />
+              <mat-error *ngIf="produitForm.get('descriptionProd')?.hasError('required')" style="color:red;">
+                La description du produit est requise.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+              <input matInput type="number" placeholder="Prix" formControlName="prix" required />
+              <mat-error *ngIf="produitForm.get('prix')?.hasError('required')" style="color:red;">
+                Le prix est requis.
+              </mat-error>
+              <mat-error *ngIf="produitForm.get('prix')?.hasError('min')" style="color:red;">
+                Le prix doit être supérieur à 0.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+              <input matInput type="number" placeholder="Quantité en stock" formControlName="quantiteEnStock" required />
+              <mat-error *ngIf="produitForm.get('quantiteEnStock')?.hasError('required')" style="color:red;">
+                La quantité en stock est requise.
+              </mat-error>
+              <mat-error *ngIf="produitForm.get('quantiteEnStock')?.hasError('min')" style="color:red;">
+                La quantité doit être supérieure à 0.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+              <input matInput placeholder="Couleur" formControlName="couleur" required />
+              <mat-error *ngIf="produitForm.get('couleur')?.hasError('required')" style="color:red;">
+                La couleur est requise.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="accent">
+              <input matInput type="date" placeholder="Date d'ajout" formControlName="dateAjout" required />
+              <mat-error *ngIf="produitForm.get('dateAjout')?.hasError('required')" style="color:red;">
+                La date d'ajout est requise.
+              </mat-error>
+            </mat-form-field>
+
+            <div style="padding-left: 25%">
+              <button class="custom-btn btn-8" mat-button (click)="onNoClick()">
+                <span><b>Annuler</b></span>
+              </button>
+              <button class="custom-btn btn-8" mat-stroked-button color="accent" type="submit" [disabled]="!produitForm.valid">
+                <span><b>Modifier</b></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </ng-container>
+</div>

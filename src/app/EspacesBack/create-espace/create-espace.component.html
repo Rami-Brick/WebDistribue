@@ -1,0 +1,82 @@
+<!-- En-tête avec Breadcrumb et Menu -->
+<div class="main-wrapper" [ngClass]="{ 'menu-opened': showMiniSidebar === true }">
+  <app-header *ngIf="firstHeader === true"></app-header>
+
+  <!-- Breadscrumb Section -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <div class="row align-items-center text-center">
+        <div class="col-md-12 col-12">
+          <h2 class="breadcrumb-title">Créer un Nouvel Espace</h2>
+          <nav aria-label="breadcrumb" class="page-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active" aria-current="page">Créer Espace</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Content -->
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="card dash-cards">
+          <div class="card-header">
+            <h4>Formulaire de Création d'un Espace</h4>
+          </div>
+          <div class="card-body">
+            <form (ngSubmit)="createEspace()">
+              <div class="form-group">
+                <label>Nom de l'Espace</label>
+                <input type="text" [(ngModel)]="espace.nom" name="nom" class="form-control" required placeholder="Nom">
+              </div>
+
+              <div class="form-group">
+                <label>Description</label>
+                <textarea [(ngModel)]="espace.description" name="description" rows="4" class="form-control" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Adresse</label>
+                <input type="text" [(ngModel)]="espace.adresse" name="adresse" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label>Latitude</label>
+                <input type="number" [(ngModel)]="espace.latitude" name="latitude" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label>Longitude</label>
+                <input type="number" [(ngModel)]="espace.longitude" name="longitude" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label>Tarif</label>
+                <input type="number" [(ngModel)]="espace.tarif" name="tarif" class="form-control" required>
+              </div>
+
+              <div class="form-group">
+                <label>Disponibilité</label>
+                <select [(ngModel)]="espace.disponibilite" name="disponibilite" class="form-control">
+                  <option [value]="true">Disponible</option>
+                  <option [value]="false">Non disponible</option>
+                </select>
+              </div>
+
+              <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+                {{ isLoading ? 'Création en cours...' : 'Créer Espace' }}
+              </button>
+            </form>
+
+
+            <!-- Message d'erreur -->
+            <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

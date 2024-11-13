@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Modifier Espace</h2>
+  <form *ngIf="espace">
+    <div class="form-group">
+      <label>Nom</label>
+      <input type="text" [(ngModel)]="espace.nom" name="nom" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea [(ngModel)]="espace.description" name="description" rows="4" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+      <label>Adresse</label>
+      <input type="text" [(ngModel)]="espace.adresse" name="adresse" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label>Tarif</label>
+      <input type="number" [(ngModel)]="espace.tarif" name="tarif" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label>Disponibilité</label>
+      <select [(ngModel)]="espace.disponibilite" name="disponibilite" class="form-control">
+        <option [value]="true">Disponible</option>
+        <option [value]="false">Non disponible</option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-success" (click)="updateEspace()">Mettre à jour</button>
+  </form>
+
+  <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+</div>

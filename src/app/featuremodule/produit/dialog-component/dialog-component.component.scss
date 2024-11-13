@@ -1,0 +1,95 @@
+/* Container principal pour le formulaire */
+div[fxLayout="column"] {
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 900px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre du formulaire */
+h1 {
+  font-size: 2rem;
+  color: #6c43a1;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Formulaire - espacement entre les champs */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Boutons */
+button.custom-btn {
+  margin: 10px 0;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button.custom-btn.btn-8 {
+  background-color: #6c43a1;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+button.custom-btn.btn-8:hover {
+  background-color: #5a3580;
+}
+
+/* Style pour le bouton "Annuler" */
+button.mat-button {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+}
+
+button.mat-button:hover {
+  background-color: #bdbdbd;
+}
+
+/* Style pour le bouton "Modifier" */
+button.mat-stroked-button {
+  background-color: #6c43a1;
+  color: white;
+  border: none;
+}
+
+button.mat-stroked-button:disabled {
+  background-color: #dcdcdc;
+  color: #a1a1a1;
+}
+
+/* Affichage des erreurs */
+mat-error {
+  font-size: 0.9rem;
+  color: red;
+}
+
+/* Champs de saisie */
+input[matInput] {
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+input[matInput]:focus {
+  border-color: #6c43a1;
+}
+
+/* Flexbox pour aligner les éléments */
+div[fxLayoutAlign="center center"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
