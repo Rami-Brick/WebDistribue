@@ -1,0 +1,52 @@
+version: '3,9'
+services:
+  eureka:
+    container_name: eureka
+    image: eyasdk/eureka
+    build: ./Eureka
+    ports:
+      - "8761:8761"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+
+  gateway:
+    container_name: gateway
+    image: eyasdk/gatewayapi
+    build: ./GatewayApi
+    ports:
+      - "8083:8083"
+    depends_on:
+      - eureka
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+
+
+
+  evenement:
+    container_name: evenement
+    image: eyasdk/evenement
+    build: ./Evenement
+    ports:
+      - "9090:9090"
+    depends_on:
+      - eureka
+      - mysqldb
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/Event_BD?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka/
+
+
+  mysqldb:
+    image: mysql:8.0.13
+    container_name: mysqldb
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: Event_BD
+    ports:
+      - "3306:3306"
